@@ -9,3 +9,6 @@ def home(request):
         'actualiza':None
     }
     return render(request, 'auto/auto_admin.html', context)
+
+def prueba():
+    pass
