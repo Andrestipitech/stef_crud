@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Prueba Stefany{% endblock%}</title> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static '/css/propio.css'%}">
+    <link rel="stylesheet" href="{% static '/css/dataTables.bootstrap5.min.css'%}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css"/>
+    <script src="https://kit.fontawesome.com/4ab2e2f761.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Stefany</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ms-auto">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link" href="#">Features</a>
+              <a class="nav-link" href="#">Pricing</a>
+              <a class="nav-link disabled">Disabled</a>
+            </div>
+          </div>
+        </div>
+    </nav>
+    {% block contenido%}
+    <div class="container ">
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <h2>Formulario</h2>
+            {%block form%}
+            <form>
+              <div class="mb-3">
+                <label for="marca" class="form-label">Marca</label>
+                <input type="text" class="form-control" id="marca" placeholder="Toyota">
+              </div>
+              <div class="mb-3">
+                <label for="modelo" class="form-label">Modelo</label>
+                <input type="text" class="form-control" id="modelo" placeholder="Rav-4">
+              </div>
+              <div class="mb-3">
+                <label for="cc" class="form-label">Cilindraje</label>
+                <input type="number" class="form-control" id="cc">
+              </div>
+              <div class="mb-3">
+                <label for="descripcion" class="form-label">Especificaciones</label>
+                <textarea class="form-control" id="descripcion" rows="3"></textarea>
+              </div>
+              <div class="d-grid gap-2 ">
+                <button class="btn btn-success" type="button">Guardar</button>
+                <button class="btn btn-danger" type="button">Cancelar</button>
+              </div>
+            </form>
+            {% endblock %}
+          </div>
+          <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+            <h2>Tabla</h2>
+            {% block tabla%}
+            <table class="table table-striped table-dark table-responsive" id="myTable" style="width:100%">
+              <thead>
+                <tr>
+                  <th class="center">#</th>
+                  <th class="center">Marca</th>
+                  <th class="center">Modelo</th>
+                  <th class="center">Cilindraje</th>
+                  <th class="center">Especificaciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="center">1</td>
+                  <td class="center">Toyota</td>
+                  <td class="center">Rav-4</td>
+                  <td class="center">2000</td>
+                  <td class="center">Diesel, 4x4</td>
+                </tr>
+                <tr>
+                  <td class="center">2</td>
+                  <td class="center">Toyota</td>
+                  <td class="center">Rav-4</td>
+                  <td class="center">2000</td>
+                  <td class="center">Diesel, 4x4</td>
+                </tr>
+                <tr>
+                  <td class="center">3</td>
+                  <td class="center">Toyota</td>
+                  <td class="center">Rav-4</td>
+                  <td class="center">2000</td>
+                  <td class="center">Diesel, 4x4</td>
+                </tr>
+              </tbody>
+            </table>
+            {% endblock %}
+          </div>
+        </div>
+        
+    </div>
+    {% endblock%}
+    <div class="container mt-5 mb-3">
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{% static '/img/fondo3.png'%}" class="d-block w-100" alt="prueba1" height="500">
+          </div>
+          <div class="carousel-item">
+            <img src="{% static '/img/fondo4.png'%}" class="d-block w-100" alt="prueba2" height="500">
+          </div>
+          <div class="carousel-item">
+            <img src="{% static '/img/fondo5.png'%}" class="d-block w-100" alt="prueba3" height="500">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  <script src="{% static '/js/jquery3_6_3.js'%}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+  <script src="{% static '/js/jquery.dataTables.min.js'%}"></script>
+  <script src="{% static '/js/dataTables.bootstrap5.min.js'%}"></script>
+  <script src="{% static '/js/table.js'%}"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
+  
+</body>
+</html>
