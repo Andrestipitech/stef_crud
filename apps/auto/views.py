@@ -11,4 +11,4 @@ def home(request):
     return render(request, 'auto/auto_admin.html', context)
 
 def prueba():
-    pass
+    print("hola")
