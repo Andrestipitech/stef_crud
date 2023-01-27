@@ -1,1 +1,63 @@
 {% extends 'main/index.html'%}
+{% block title %}
+    Auto
+{% endblock%}
+{%block form%}
+    <form method="post" action="{%url 'auto:crear_auto'%}">
+        {% csrf_token%}
+        <div class="mb-3">
+        <label for="marca" class="form-label">Marca</label>
+        <input type="text" class="form-control" id="marca" name="marca" placeholder="Toyota">
+        </div>
+        <div class="mb-3">
+        <label for="modelo" class="form-label">Modelo</label>
+        <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Rav-4">
+        </div>
+        <div class="mb-3">
+        <label for="cc" class="form-label">Cilindraje</label>
+        <input type="number" class="form-control" id="cc" name="cc">
+        </div>
+        <div class="mb-3">
+        <label for="descripcion" class="form-label">Especificaciones</label>
+        <textarea class="form-control" id="descripcion" rows="3" name="descripcion"></textarea>
+        </div>
+        <div class="d-grid gap-2 ">
+        <button class="btn btn-success" type="submit">Guardar</button>
+        <button class="btn btn-danger" type="reset">Cancelar</button>
+        </div>
+    </form>
+{% endblock %}
+{% block tabla%}
+    <table class="table table-striped table-dark table-responsive" id="myTable" style="width:100%">
+        <thead>
+        <tr>
+            <th class="center">#</th>
+            <th class="center">Marca</th>
+            <th class="center">Modelo</th>
+            <th class="center">Cilindraje</th>
+            <th class="center">Especificaciones</th>
+            <th class="center">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% if autos%}
+                {% for auto in autos%}
+                    <tr>
+                        <td class="center">{{auto.idpbv}}</td>
+                        <td class="center">{{auto.marca}}</td>
+                        <td class="center">{{auto.modelo}}</td>
+                        <td class="center">{{auto.cc}}</td>
+                        <td class="center">{{auto.especificaciones}}</td>
+                        <td class="center">
+                            <a class="btn btn-primary"  href=""> <i class="fa-solid fa-pen-to-square"></i></a>
+                            <a class="btn btn-danger" href="{%url 'auto:eliminar_auto' auto.idpbv%}"> <i class="fa-solid fa-trash"></i></a>
+                        </td>
+                    </tr>
+                {% endfor%}
+            {% else %}
+                <h2 class="center text-light">No existe datos</h2>
+            {% endif%}
+        
+        </tbody>
+    </table>
+{% endblock %}
