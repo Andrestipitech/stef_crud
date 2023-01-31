@@ -3,29 +3,56 @@
     Auto
 {% endblock%}
 {%block form%}
-    <form method="post" action="{%url 'auto:crear_auto'%}">
-        {% csrf_token%}
-        <div class="mb-3">
-        <label for="marca" class="form-label">Marca</label>
-        <input type="text" class="form-control" id="marca" name="marca" placeholder="Toyota 1">
-        </div>
-        <div class="mb-3">
-        <label for="modelo" class="form-label">Modelo</label>
-        <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Rav-4">
-        </div>
-        <div class="mb-3">
-        <label for="cc" class="form-label">Cilindraje</label>
-        <input type="number" class="form-control" id="cc" name="cc">
-        </div>
-        <div class="mb-3">
-        <label for="descripcion" class="form-label">Especificaciones</label>
-        <textarea class="form-control" id="descripcion" rows="3" name="descripcion"></textarea>
-        </div>
-        <div class="d-grid gap-2 ">
-        <button class="btn btn-success" type="submit">Guardar</button>
-        <button class="btn btn-danger" type="reset">Cancelar</button>
-        </div>
-    </form>
+    {% if actualiza %}
+        <form method="post" action="{%url 'auto:actualiza_auto'%}">
+            {% csrf_token%}
+            <div class="mb-3">
+            <label for="marca" class="form-label">Marca</label>
+            <input type="text" class="form-control" id="marca" name="marca" value="{{actualiza.marca}}">
+            </div>
+            <div class="mb-3">
+            <label for="modelo" class="form-label">Modelo</label>
+            <input type="text" class="form-control" id="modelo" name="modelo" value="{{actualiza.modelo}}">
+            </div>
+            <div class="mb-3">
+            <label for="cc" class="form-label">Cilindraje</label>
+            <input type="number" class="form-control" id="cc" name="cc" value="{{actualiza.cc}}">
+            </div>
+            <div class="mb-3">
+            <label for="descripcion" class="form-label">Especificaciones</label>
+            <textarea class="form-control" id="descripcion" rows="3" name="descripcion">{{actualiza.especificaciones}}</textarea>
+            </div>
+            <input type="hidden" name="idAuto" value="{{actualiza.idpbv}}">
+            <div class="d-grid gap-2 ">
+                <button class="btn btn-success" type="submit">Actualizar</button>
+                <a class="btn btn-danger" href="{%url 'auto:index'%}">Cancelar</a>
+            </div>
+        </form>
+    {%else%}
+        <form method="post" action="{%url 'auto:crear_auto'%}">
+            {% csrf_token%}
+            <div class="mb-3">
+            <label for="marca" class="form-label">Marca</label>
+            <input type="text" class="form-control" id="marca" name="marca" placeholder="Toyota 1">
+            </div>
+            <div class="mb-3">
+            <label for="modelo" class="form-label">Modelo</label>
+            <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Rav-4">
+            </div>
+            <div class="mb-3">
+            <label for="cc" class="form-label">Cilindraje</label>
+            <input type="number" class="form-control" id="cc" name="cc">
+            </div>
+            <div class="mb-3">
+            <label for="descripcion" class="form-label">Especificaciones</label>
+            <textarea class="form-control" id="descripcion" rows="3" name="descripcion"></textarea>
+            </div>
+            <div class="d-grid gap-2 ">
+                <button class="btn btn-success" type="submit">Guardar</button>
+                <a class="btn btn-danger" href="{%url 'auto:index'%}">Cancelar</a>
+            </div>
+        </form>
+    {%endif%}
 {% endblock %}
 {% block tabla%}
     <table class="table table-striped table-dark table-responsive" id="myTable" style="width:100%">
@@ -49,7 +76,7 @@
                         <td class="center">{{auto.cc}}</td>
                         <td class="center">{{auto.especificaciones}}</td>
                         <td class="center">
-                            <a class="btn btn-primary"  href=""> <i class="fa-solid fa-pen-to-square"></i></a>
+                            <a class="btn btn-primary"  href="{%url 'auto:act_auto_form' auto.idpbv%}"> <i class="fa-solid fa-pen-to-square"></i></a>
                             <a class="btn btn-danger" href="{%url 'auto:eliminar_auto' auto.idpbv%}"> <i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
